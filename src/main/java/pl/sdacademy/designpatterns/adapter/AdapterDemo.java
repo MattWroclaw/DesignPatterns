@@ -8,6 +8,7 @@ import pl.sdacademy.designpatterns.adapter.systemb.SystemBUserAdapter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class AdapterDemo {
     public static void main(String[] args) {
@@ -30,6 +31,34 @@ public class AdapterDemo {
         System.out.println(userB.getUsername());
         System.out.println(userB.getRoles());
 
+        String inStr = "Wyrażenie lambda rozszerzające Javę";
+        String outStr;
+
+        System.out.println("łańcuch wejściowy: "+ inStr);
+
+        outStr = stringOp( (String jakis)-> {
+            String wynik = "";
+            for (int i = 0 ; i<jakis.length(); i++){
+                if(jakis.charAt(i) != ' '){
+                    wynik += jakis.charAt(i);
+                }
+            }return wynik;
+        }, inStr);
+
+        System.out.println(outStr);
+
+        InterfejsFunkcyjny odwr = (str)->{
+            String odw = "";
+            for (int i =str.length()-1 ; i>0 ;i--){
+                odw += str.charAt(i);
+            }
+            return odw;
+        };
+        System.out.println(stringOp(odwr, inStr));
 
     }
+    static String stringOp(InterfejsFunkcyjny infu, String s){
+        return infu.funk(s);
+    }
+
 }
